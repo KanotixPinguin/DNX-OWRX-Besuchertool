@@ -10,6 +10,12 @@
 > - **Reines Hobbyprojekt – frei nutzbar, änderbar & verbreitbar:** Dieses Projekt entsteht ausschließlich aus reinem Hobby und Interesse am gemeinsamen Funk-/SDR-Hobby. Es steht ausdrücklich frei zur Verfügung und darf frei genutzt, weiterverbreitet, verändert und verbessert werden.
 <!-- DNX-DISCLAIMER-END -->
 
+<!-- DNX-PREVIEW-START -->
+## Live-Vorschau
+
+![Live-Vorschau — DNX OWRX Besuchertool](docs/preview.png)
+<!-- DNX-PREVIEW-END -->
+
 ## Kurzbeschreibung
 
 Besucheranzeige für OpenWebRX+ mit optionaler signierter Accountname-/Rollen-Verknüpfung.

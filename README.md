@@ -72,3 +72,13 @@ Live-Besucheranzeige mit optionaler Accountname-/Rollen-Verknüpfung (`dnx-acces
 **DE:** Private, inoffizielle Hobby-Anpassung (Mod-Mode) für OpenWebRX / OpenWebRX+. Kein offizielles OpenWebRX- oder OpenWebRX+-Projekt, keine Verbindung zu oder Unterstützung durch die jeweiligen Entwickler. Nutzung erfolgt vollständig auf eigene Gefahr; soweit gesetzlich zulässig wird jede Haftung ausgeschlossen. Vor dem Einspielen bitte Sicherungen anlegen.
 
 **EN:** Private, unofficial hobby modification (Mod-Mode) for OpenWebRX / OpenWebRX+. Not an official OpenWebRX or OpenWebRX+ project; no affiliation with or support from its maintainers. Use entirely at your own risk; to the extent permitted by law, no liability is accepted. Always create backups before installing.
+
+---
+
+## Verbindungen im DNX-Ökosystem
+
+![DNX Gesamtarchitektur & Verbindungen](docs/dnx-architektur-verbindungen.png)
+![Datenflüsse: Spektrum, 3D-Hintergrund & Speicherung](docs/dnx-datenfluss-speicherung.png)
+
+* **Verbindung zu `DNX-Receiver-Account-Control` (`:8095/api/me`):** Das Besuchertool liest `visitor_tools`, `profile_switch`, `scanner`, `favorites`, `tune` und `styler`, blendet eingeloggte Accountnamen/Rollen sauber an und schützt über `dnx_update_wache.js` vor ungewollten Überschreibungen.
+* **Verbindung zu `DNX-Styler` (`#dnx-blk-*`):** Nutzt gemeinsame Design- und Seitenanker (`dnx.farben.v1`, `dnx.pegel.links.v5`, `dnx.blk.*`), sodass Besucherliste, Update-Wache und Styler konfliktfrei zusammenarbeiten.

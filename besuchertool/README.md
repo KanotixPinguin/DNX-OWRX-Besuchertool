@@ -1,4 +1,4 @@
-# DNX OWRX Besuchertool (`v1.3.2`)
+# DNX OWRX Besuchertool (`v1.3.3`)
 
 <!-- DNX-DISCLAIMER-START -->
 > **Wichtiger Hinweis / Vollständige Distanzierung (Hobby-Mod-Mode)**
@@ -30,23 +30,22 @@
 | **3-Geräte-Schalterleiste (`v6.10`)** | Aktive Anzeige von `Gerät 1 · Kanal 14`, `Gerät 2 · Kanal 26` & `Gerät 3 · Kanal 4` in der Spalte `Funkgerät` samt Umschaltleiste `Funkgerät 1 / 2 / 3` | ![3-Geräte-Schalterleiste](docs/styler-3geraete-schalterleiste.png) |
 <!-- DNX-PREVIEW-END -->
 
-Live-Besucheranzeige mit optionaler Accountname-/Rollen-Verknüpfung (`dnx-access-control`), `Marker`- & `Funkgerät`-Spalte (`v6.10`), serverseitiger Eigenzeilen-Erkennung (`eigene`) sowie der gehärteten **DNX Update-Wache `v3.12`**.
+Live-Besucheranzeige mit optionaler Accountname-/Rollen-Verknüpfung (`dnx-access-control`), `Marker`- & `Funkgerät`-Spalte (`v6.11`), serverseitiger Eigenzeilen-Erkennung (`eigene`) sowie der gehärteten **DNX Update-Wache `v3.12`**.
 
 ## Funktionsumfang
 
 - **10-Spalten-Besucherübersicht im Receiver-Panel:** Zeigt pro WebSocket-Verbindung `Nr.`, `Name`, `Rolle`, `IP` (serverseitig strikt nur für Admins über `visitorstatus.py`), `Profil`, `Frequenz`, `Modus`, aktives `Funkgerät` (inkl. Gerät `1` / `2` / `3` und Kanal), `Marker` sowie `Status` – jede Sitzung bleibt als eigene Zeile sichtbar.
 - **Serverseitige Eigenzeilen-Erkennung (`eigene`):** `visitorstatus.py` liefert das Feld `eigene` samt `dnx-kennung`-Cookie-Header-Fallback und `getattr(c, "dsp", None)` (lock-freies Auslesen ohne WebSocket-Deadlocks).
 - **Vollbild-Overlay & Schnell-Steuerung:** Zuschaltbare Großansicht (`Bildschirm: AN`) mit Deckkraftregler (`%`), `Anzeige: AN/AUS`, `Ton: AN/AUS`, `Account / Profilsteuerung` (`Konto`, `Aktivität 24h`, `Admin-Logbuch`, `Sperren`) sowie Admin-Schnellsperre per Klick auf eine Besucherzeile.
-- **3-Geräte-Unterstützung (`dnx_styler.js v6.10`):** Anzeige und Synchronisierung für `Funkgerät 1 / 2 / 3` (`1 ⇄ 2 ⇄ 3`-Mausradtausch) über `:8099`.
+- **3-Geräte-Unterstützung (`dnx_styler.js v6.11`):** Anzeige und Synchronisierung für `Funkgerät 1 / 2 / 3` (`1 ⇄ 2 ⇄ 3`-Mausradtausch) über `:8099`.
 - **Gehärtete Update-Wache (`dnx_update_wache.js v3.12`):**
   - Streng servergeprüfte Admin-Freigabe über `api/me` (`:8095 / :8096 / :8091`); lokale Altlasten (`?updateadmin=1`, `dnx.update.kasten.wer`, `dnx_betreiber`) werden aktiv entfernt – Gäste und normale User erhalten niemals das Admin-Panel.
   - Automatische Re-Prüfung bei Fokus-/Seitenwechsel sowie mehrsprachige Update-Karten (9 Sprachen) und dreifache Endlosschleifen-Sperre (`localStorage`, `sessionStorage`, `?v=<ts>`).
 
-## Neu in v1.3.2
+## Neu in v1.3.3
 
-- **`dnx_styler.js` (`v6.10`) + `dnx_stand.txt` (`v6.10 1001775`):** Unterstützung der 3-Geräte-Schalterleiste (`Funkgerät 1 / 2 / 3` + Mausradtausch `1 ⇄ 2 ⇄ 3`).
-- **`dnx_update_wache.js` (`v3.12`):** Gehärtetes Admin-Gate über `api/me` + Altlasten-Bereinigung für Gast-Browser.
-- **`visitorstatus.py`:** Lock-freies Lesen von `getattr(c, "dsp", None)` + `dnx-kennung`-Cookie-Fallback + IP-Schutz für Gäste.
+- **`dnx_styler.js` (`v6.11` / UI `v6.28`) + `dnx_stand.txt` (`v6.11 1018999`):** Mitgelieferte Styler-/Besucher-Komplettfassung auf Stand `v6.11` synchronisiert (inkl. Spektrum-/Wasserfall-Entkopplung nach SDR#-Art mit `DNX-Pegel`, kalibriertem dBFS-Spektrum-Raster `#dnx-spek-raster`, `Spektrum-Skala` & `3-Geräte-Schalterleiste`).
+- **`v1.3.2`–Basis beibehalten:** Gehärtete **Update-Wache `v3.12`**, lock-freies `visitorstatus.py` (`getattr(c, "dsp", None)` + `dnx-kennung`-Cookie-Fallback + IP-Schutz) sowie `index.html` (`?v=20261121b`).
 
 ## Dateien im Paket (`besuchertool/`)
 
@@ -54,8 +53,8 @@ Live-Besucheranzeige mit optionaler Accountname-/Rollen-Verknüpfung (`dnx-acces
 |---|---|---|
 | `visitorstatus.py` | `/usr/lib/python3/dist-packages/owrx/controllers/visitorstatus.py` (im Container/System) | Besucherliste + Feld `eigene` + Cookie-Fallback + IP-Schutz |
 | `dnx_update_wache.js` | `…/htdocs/plugins/receiver/dnx_update_wache.js` | Update-Wache `v3.12` (servergeprüfter Admin-Zugriff) |
-| `dnx_styler.js` | `…/htdocs/plugins/receiver/dnx_styler.js` | Besucherliste, Kennungswort & 3-Geräte-Leiste (`v6.10`) |
-| `dnx_stand.txt` | `…/htdocs/plugins/receiver/dnx_stand.txt` | Versions-/Größenstempel (`v6.10 1001775`) |
+| `dnx_styler.js` | `…/htdocs/plugins/receiver/dnx_styler.js` | Besucherliste, Kennungswort & 3-Geräte-Leiste (`v6.11`, `1.018.999 B`) |
+| `dnx_stand.txt` | `…/htdocs/plugins/receiver/dnx_stand.txt` | Versions-/Größenstempel (`v6.11 1018999`) |
 | `index.html` | `…/htdocs/index.html` (Vorlage) | Lädt `dnx_update_wache.js?v=20261121b` |
 | `docs/` | — | 5 sachliche `1600×980`-Funktionsscreenshots |
 
